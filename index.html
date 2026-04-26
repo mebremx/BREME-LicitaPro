@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="BREME LicitaPro — Sistema profesional para competir mejor en licitaciones de gobierno en México." />
+<title>BREME LicitaPro · Licitaciones de Gobierno en México</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ================= RESET ================= */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    background:#0B0B0D;
+    color:#ECE9E2;
+    font-weight:400;
+    font-size:16px;
+    line-height:1.6;
+    letter-spacing:-.005em;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;letter-spacing:inherit}
+  img{max-width:100%;display:block}
+
+  :root{
+    --bg:#0B0B0D;
+    --bg-raised:#101012;
+    --bg-vip:#0E0D0A;
+    --text:#ECE9E2;
+    --muted:#8A8A94;
+    --muted-2:#5a5a62;
+    --accent:#C9A46A;
+    --accent-soft:rgba(201,164,106,.14);
+    --line:rgba(236,233,226,.09);
+    --line-strong:rgba(236,233,226,.16);
+    --line-accent:rgba(201,164,106,.35);
+    --serif:'Instrument Serif','Canela','Fraunces','PP Editorial',Georgia,serif;
+  }
+
+  .serif{font-family:var(--serif);font-weight:400;letter-spacing:-.01em}
+  .eyebrow{
+    font-size:11px;font-weight:500;
+    letter-spacing:.22em;text-transform:uppercase;
+    color:var(--muted);
+  }
+  .eyebrow.accent{color:var(--accent)}
+  h1,h2,h3,h4{font-weight:400;letter-spacing:-.02em;color:var(--text)}
+  h1{font-family:var(--serif);font-size:clamp(44px,7vw,92px);line-height:1;letter-spacing:-.025em}
+  h2{font-family:var(--serif);font-size:clamp(34px,5vw,64px);line-height:1.05}
+  h3{font-family:var(--serif);font-size:clamp(22px,2.5vw,30px);line-height:1.2}
+  p{color:var(--muted);font-size:16px;line-height:1.7;font-weight:400}
+  em,.italic{font-style:italic;color:var(--accent)}
+
+  .container{width:100%;max-width:1240px;margin:0 auto;padding:0 40px}
+  @media(max-width:640px){.container{padding:0 24px}}
+  section{padding:140px 0;position:relative}
+  @media(max-width:720px){section{padding:90px 0}}
+  .section-head{text-align:center;max-width:780px;margin:0 auto 90px}
+  .section-head .eyebrow{margin-bottom:24px;display:inline-block}
+  .section-head h2{margin-bottom:24px}
+  .section-head p{font-size:17px;max-width:620px;margin:0 auto}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    padding:16px 32px;font-size:13px;font-weight:500;
+    letter-spacing:.12em;text-transform:uppercase;
+    transition:all .4s ease;position:relative;white-space:nowrap;
+    border-radius:0;cursor:pointer;text-align:center;
+  }
+  .btn-primary{background:var(--accent);color:#0B0B0D;border:1px solid var(--accent)}
+  .btn-primary:hover{background:transparent;color:var(--accent)}
+  .btn-outline{background:transparent;color:var(--text);border:1px solid var(--line-strong)}
+  .btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+  .btn-disabled{
+    background:transparent;color:var(--muted);
+    border:1px solid var(--line);cursor:not-allowed;opacity:.7;
+  }
+  .btn-disabled:hover{background:transparent;color:var(--muted);border-color:var(--line)}
+
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding:18px 0;
+    background:rgba(11,11,13,.7);
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    border-bottom:1px solid transparent;
+    transition:all .4s;
+  }
+  .nav.scrolled{border-bottom-color:var(--line);background:rgba(11,11,13,.92)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .logo{
+    font-family:var(--serif);font-size:22px;letter-spacing:.02em;color:var(--text);
+    display:flex;align-items:center;gap:10px;
+  }
+  .logo .sub{
+    font-family:'Inter',sans-serif;font-size:10px;letter-spacing:.25em;
+    text-transform:uppercase;color:var(--muted);
+    padding-left:10px;border-left:1px solid var(--line-strong);
+    align-self:center;
+  }
+  .logo-img{height:32px;max-width:140px;width:auto;object-fit:contain;display:block}
+  .footer-brand .logo-img{height:42px;max-width:160px}
+  .logo-text{
+    font-family:var(--serif);font-size:22px;letter-spacing:.02em;
+    color:var(--text);align-items:center;gap:10px;
+  }
+  .footer-brand .logo-text{font-size:26px}
+  .nav-links{display:flex;gap:28px;align-items:center}
+  .nav-links a{
+    font-size:12px;font-weight:500;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted);transition:color .3s;
+  }
+  .nav-links a:hover{color:var(--text)}
+  .nav-cta{
+    padding:10px 20px!important;font-size:11px!important;
+    border:1px solid var(--accent);color:var(--accent)!important;
+    background:var(--accent);color:#0B0B0D!important;
+  }
+  .nav-cta:hover{background:transparent;color:var(--accent)!important}
+  @media(max-width:960px){.nav-links a:not(.nav-cta){display:none}.logo .sub{display:none}}
+
+  .hero{
+    min-height:100vh;padding:180px 0 120px;
+    display:flex;align-items:center;position:relative;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-inner{text-align:center;max-width:1000px;margin:0 auto;position:relative;z-index:2}
+  .hero-meta{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:60px}
+  .hero-meta .line-h{width:60px;height:1px;background:var(--line-strong)}
+  .hero-meta .label{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+  .hero h1{margin-bottom:40px}
+  .hero h1 em{font-style:italic;color:var(--accent);font-weight:400}
+  .hero .lead{
+    font-size:18px;color:var(--muted);max-width:620px;
+    margin:0 auto 50px;line-height:1.7;
+  }
+  .hero-ctas{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:120px}
+  .hero-stats{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    max-width:900px;margin:0 auto;
+    border-top:1px solid var(--line);padding-top:40px;
+  }
+  .hero-stat{text-align:center;padding:0 20px;position:relative}
+  .hero-stat:not(:last-child)::after{
+    content:"";position:absolute;right:0;top:10%;bottom:10%;
+    width:1px;background:var(--line);
+  }
+  .hero-stat .num{
+    font-family:var(--serif);font-size:clamp(28px,3.5vw,42px);
+    color:var(--text);line-height:1;margin-bottom:10px;letter-spacing:-.02em;
+  }
+  .hero-stat .num em{font-style:italic;color:var(--accent)}
+  .hero-stat .lbl{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  @media(max-width:720px){
+    .hero-stats{grid-template-columns:1fr;gap:30px;padding-top:30px}
+    .hero-stat:not(:last-child)::after{display:none}
+    .hero-stat{padding-bottom:30px;border-bottom:1px solid var(--line)}
+    .hero-stat:last-child{border-bottom:none;padding-bottom:0}
+  }
+
+  .authority{padding:100px 0;border-bottom:1px solid var(--line)}
+  .authority-inner{display:grid;grid-template-columns:1fr 1.5fr;gap:80px;align-items:start}
+  @media(max-width:900px){.authority-inner{grid-template-columns:1fr;gap:50px}}
+  .authority-left .eyebrow{margin-bottom:20px}
+  .authority-left h3{margin-bottom:16px}
+  .authority-left p{font-size:15px}
+  .authority-right{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+  @media(max-width:700px){.authority-right{grid-template-columns:1fr}}
+  .auth-item{padding:30px 26px;border-left:1px solid var(--line);transition:background .4s}
+  .auth-item:first-child{border-left:none;padding-left:0}
+  @media(max-width:700px){
+    .auth-item{border-left:none;border-top:1px solid var(--line);padding:26px 0}
+    .auth-item:first-child{border-top:none;padding-top:0}
+  }
+  .auth-item .num-m{font-family:var(--serif);font-size:28px;color:var(--accent);margin-bottom:14px;line-height:1;font-style:italic}
+  .auth-item h4{font-family:var(--serif);font-size:20px;margin-bottom:8px;color:var(--text);font-weight:400}
+  .auth-item p{font-size:14px;color:var(--muted)}
+
+  .problem-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:0;margin-top:40px;border-top:1px solid var(--line);
+  }
+  @media(max-width:900px){.problem-grid{grid-template-columns:1fr}}
+  .problem-item{
+    padding:50px 40px;
+    border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+    transition:background .4s;
+  }
+  .problem-item:last-child{border-right:none}
+  @media(max-width:900px){.problem-item{border-right:none;padding:44px 20px}}
+  .problem-item:hover{background:rgba(236,233,226,.015)}
+  .problem-num{
+    font-family:var(--serif);font-size:56px;font-style:italic;
+    color:var(--accent);line-height:1;margin-bottom:24px;opacity:.9;
+  }
+  .problem-item h3{margin-bottom:14px}
+  .problem-item p{font-size:15px}
+
+  .solution{background:var(--bg)}
+  .solution-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);
+    gap:1px;background:var(--line);border:1px solid var(--line);
+  }
+  @media(max-width:720px){.solution-grid{grid-template-columns:1fr}}
+  .sol-item{
+    padding:50px 44px;background:var(--bg);transition:background .4s;
+    min-height:260px;display:flex;flex-direction:column;justify-content:space-between;
+  }
+  @media(max-width:720px){.sol-item{padding:40px 28px;min-height:auto}}
+  .sol-item:hover{background:var(--bg-raised)}
+  .sol-head{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+  .sol-index{font-family:var(--serif);font-size:14px;color:var(--accent);font-style:italic}
+  .sol-line{flex-grow:1;height:1px;background:var(--line)}
+  .sol-item h3{margin-bottom:14px;font-size:26px}
+  .sol-item p{font-size:15px}
+
+  .products-list{margin-top:40px;border-top:1px solid var(--line-strong)}
+  .product-row{
+    padding:50px 0;border-bottom:1px solid var(--line);
+    display:grid;grid-template-columns:80px 1fr 240px 200px;gap:40px;
+    align-items:center;transition:background .4s;position:relative;
+  }
+  .product-row:hover{background:rgba(236,233,226,.015)}
+  @media(max-width:1000px){
+    .product-row{grid-template-columns:60px 1fr 180px;gap:24px}
+    .product-cta-col{grid-column:1/-1;margin-top:10px}
+  }
+  @media(max-width:640px){
+    .product-row{grid-template-columns:1fr;gap:20px;padding:40px 0}
+  }
+  .product-row.vip{
+    background:linear-gradient(180deg,rgba(201,164,106,.035),transparent 60%);
+    border-top:1px solid var(--line-accent);border-bottom:1px solid var(--line-accent);
+    padding:60px 30px;margin-left:-30px;margin-right:-30px;
+    padding-left:30px!important;padding-right:30px!important;
+  }
+  .product-row.vip:hover{background:linear-gradient(180deg,rgba(201,164,106,.055),transparent 60%)}
+  .product-row.vip::before{
+    content:"";position:absolute;left:-30px;top:0;bottom:0;
+    width:2px;background:var(--accent);
+  }
+  @media(max-width:640px){
+    .product-row.vip{margin-left:0;margin-right:0;padding:40px 20px!important}
+    .product-row.vip::before{left:0;width:1px}
+  }
+  .product-row.coming-soon{opacity:.85}
+  .product-row.coming-soon .product-price,
+  .product-row.coming-soon .product-main h3{color:var(--muted)}
+  .product-num{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--accent)}
+  .product-main .eyebrow{display:block;margin-bottom:10px;color:var(--muted)}
+  .product-main .eyebrow.vip-eyebrow{color:var(--accent)}
+  .product-main h3{margin-bottom:10px;font-size:32px}
+  .product-main h3 em{font-style:italic;color:var(--accent)}
+  .product-main .desc{
+    font-size:14.5px;color:var(--text);opacity:.88;
+    max-width:560px;margin-bottom:10px;line-height:1.6;
+  }
+  .product-main .sub-desc{
+    font-size:13px;color:var(--muted);max-width:560px;
+    margin-bottom:18px;line-height:1.6;font-style:italic;
+    padding-left:12px;border-left:1px solid var(--line-accent);
+  }
+  .product-features{display:flex;flex-wrap:wrap;gap:10px 24px;list-style:none}
+  .product-features li{
+    font-size:12.5px;color:var(--muted);
+    position:relative;padding-left:16px;letter-spacing:.01em;
+  }
+  .product-features li::before{
+    content:"";position:absolute;left:0;top:9px;
+    width:6px;height:1px;background:var(--accent);
+  }
+  .product-price-col{text-align:right}
+  @media(max-width:640px){.product-price-col{text-align:left}}
+  .product-price{
+    font-family:var(--serif);font-size:44px;line-height:1;
+    color:var(--text);letter-spacing:-.02em;
+  }
+  .product-price .cur{font-size:20px;color:var(--muted);vertical-align:top;margin-right:3px}
+  .product-price-note{
+    font-size:11px;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--muted);margin-top:10px;
+  }
+  .product-micro{
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--accent);margin-top:6px;font-weight:500;
+  }
+  .product-cta-col{text-align:right}
+  @media(max-width:640px){.product-cta-col{text-align:left}}
+  .product-cta-col .btn{width:100%;justify-content:center}
+  .product-cta-note{
+    font-size:11px;color:var(--muted);
+    margin-top:10px;letter-spacing:.02em;text-align:center;
+  }
+  @media(max-width:640px){.product-cta-note{text-align:left}}
+  .product-tag{
+    display:inline-block;font-size:10px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--accent);
+    padding:3px 10px;border:1px solid var(--accent);
+    margin-left:12px;vertical-align:middle;font-family:'Inter',sans-serif;
+  }
+  .product-tag.filled{background:var(--accent);color:#0B0B0D}
+  .product-tag.coming{
+    background:transparent;color:var(--muted);
+    border-color:var(--line-strong);
+  }
+
+  .network{
+    padding:140px 0;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .network-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  @media(max-width:900px){.network-inner{grid-template-columns:1fr;gap:50px}}
+  .network-left .eyebrow{margin-bottom:24px;display:block}
+  .network-left h2{margin-bottom:28px;font-size:clamp(30px,4vw,48px)}
+  .network-left h2 em{color:var(--accent);font-style:italic}
+  .network-left p{margin-bottom:40px;font-size:16px}
+  .net-price-block{
+    padding:30px 0;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    margin-bottom:36px;
+    display:flex;align-items:baseline;gap:14px;
+  }
+  .net-price{
+    font-family:var(--serif);font-size:54px;color:var(--text);
+    line-height:1;letter-spacing:-.02em;
+  }
+  .net-price .cur{font-size:22px;color:var(--muted);vertical-align:top;margin-right:3px}
+  .net-period{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .net-launch-note{
+    font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--accent);font-weight:500;
+    display:flex;align-items:center;gap:10px;
+    margin-top:18px;
+  }
+  .net-launch-note::before{
+    content:"";width:24px;height:1px;background:var(--accent);
+  }
+  .net-cap-note{
+    font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--muted);margin-top:10px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .net-cap-note::before{
+    content:"";width:24px;height:1px;background:var(--line-strong);
+  }
+  .net-features{list-style:none;display:grid;gap:0}
+  .net-features li{
+    padding:18px 0;border-bottom:1px solid var(--line);
+    display:flex;align-items:center;gap:18px;
+    font-size:15px;color:var(--text);
+  }
+  .net-features li:last-child{border-bottom:none}
+  .net-features .ix{
+    font-family:var(--serif);font-style:italic;
+    color:var(--accent);font-size:13px;min-width:22px;
+  }
+
+  .final-cta{padding:180px 0;text-align:center;border-top:1px solid var(--line);position:relative}
+  .final-cta-inner{max-width:860px;margin:0 auto}
+  .final-cta .eyebrow{margin-bottom:30px;display:inline-block}
+  .final-cta h2{margin-bottom:30px}
+  .final-cta h2 em{font-style:italic;color:var(--accent)}
+  .final-cta .lead-p{
+    font-size:18px;margin-bottom:40px;max-width:620px;
+    margin-left:auto;margin-right:auto;color:var(--muted);
+  }
+  .final-cta-stats{
+    display:flex;justify-content:center;gap:60px;flex-wrap:wrap;
+    margin:50px auto 60px;padding:28px 0;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    max-width:680px;
+  }
+  .final-cta-stat{text-align:center}
+  .final-cta-stat .n{
+    font-family:var(--serif);font-style:italic;
+    font-size:28px;color:var(--accent);line-height:1;margin-bottom:8px;
+  }
+  .final-cta-stat .l{
+    font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+  }
+  .final-cta-ctas{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
+  .final-cta-note{
+    font-size:12px;color:var(--muted);letter-spacing:.03em;margin-top:14px;
+  }
+  .final-cta-path{
+    margin:34px auto 0;max-width:640px;
+    padding-top:28px;border-top:1px solid var(--line);
+    font-size:13px;color:var(--muted);line-height:1.8;
+  }
+  .final-cta-path strong{color:var(--text);font-weight:500}
+  .final-cta-path em{font-style:italic;color:var(--accent)}
+  .fomo-line{
+    margin:18px auto 0;max-width:560px;
+    font-family:var(--serif);font-size:clamp(15px,1.6vw,18px);
+    color:var(--text);line-height:1.5;letter-spacing:-.005em;
+  }
+  .fomo-line em{font-style:italic;color:var(--accent)}
+
+  footer{padding:80px 0 40px;border-top:1px solid var(--line);background:var(--bg)}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:60px;margin-bottom:60px}
+  @media(max-width:800px){.footer-grid{grid-template-columns:1fr;gap:40px}}
+  .footer-brand .logo{margin-bottom:20px}
+  .footer-brand p{font-size:14px;max-width:360px;line-height:1.7}
+  .footer-col h4{
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:20px;font-weight:500;
+    font-family:'Inter',sans-serif;
+  }
+  .footer-col a{display:block;color:var(--text);font-size:14px;padding:7px 0;transition:color .3s}
+  .footer-col a:hover{color:var(--accent)}
+  .footer-bottom{
+    padding-top:30px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:14px;
+    font-size:12px;color:var(--muted);letter-spacing:.05em;
+  }
+  .footer-bottom .meta{font-family:var(--serif);font-style:italic;color:var(--muted-2)}
+
+  /* === CRO ADD-ONS (urgency, friction, secondary CTA, audience, social proof) === */
+  .urgency-stack{
+    margin-top:14px;display:flex;flex-direction:column;gap:6px;
+    text-align:center;
+  }
+  @media(max-width:640px){.urgency-stack{text-align:left}}
+  .urgency-line{
+    font-size:11px;letter-spacing:.06em;color:var(--accent);
+    font-weight:500;line-height:1.5;
+  }
+  .urgency-line.muted{color:var(--muted);letter-spacing:.04em}
+  .friction-row{
+    display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:14px;
+    justify-content:flex-end;
+  }
+  @media(max-width:1000px){.friction-row{justify-content:flex-start}}
+  @media(max-width:640px){.friction-row{justify-content:flex-start}}
+  .friction-tag{
+    font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--muted);padding:5px 10px;
+    border:1px solid var(--line);
+  }
+  .btn-secondary-link{
+    display:block;margin-top:12px;text-align:center;
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--muted);padding:10px 0;
+    border-top:1px solid var(--line);transition:color .3s;
+  }
+  .btn-secondary-link:hover{color:var(--accent)}
+  @media(max-width:640px){.btn-secondary-link{text-align:left}}
+
+  .audience{padding:120px 0;border-bottom:1px solid var(--line)}
+  .audience-inner{max-width:980px;margin:0 auto}
+  .audience-head{text-align:center;margin-bottom:60px}
+  .audience-head .eyebrow{margin-bottom:20px;display:inline-block}
+  .audience-head h2{margin-bottom:18px}
+  .audience-head h2 em{font-style:italic;color:var(--accent)}
+  .audience-list{
+    display:grid;grid-template-columns:repeat(2,1fr);
+    gap:0;border-top:1px solid var(--line);
+  }
+  @media(max-width:720px){.audience-list{grid-template-columns:1fr}}
+  .audience-item{
+    padding:30px 28px;border-bottom:1px solid var(--line);
+    display:flex;align-items:flex-start;gap:18px;
+    transition:background .4s;
+  }
+  .audience-item:hover{background:rgba(236,233,226,.015)}
+  .audience-item:nth-child(odd){border-right:1px solid var(--line)}
+  @media(max-width:720px){.audience-item:nth-child(odd){border-right:none}}
+  .audience-item .ix{
+    font-family:var(--serif);font-style:italic;font-size:18px;
+    color:var(--accent);line-height:1.2;min-width:24px;
+  }
+  .audience-item p{
+    font-size:15px;color:var(--text);line-height:1.55;margin:0;
+  }
+
+  .social-proof{padding:120px 0;border-bottom:1px solid var(--line);background:var(--bg-raised)}
+  .social-proof-head{text-align:center;max-width:720px;margin:0 auto 60px}
+  .social-proof-head .eyebrow{margin-bottom:20px;display:inline-block}
+  .social-proof-head h2 em{font-style:italic;color:var(--accent)}
+  .social-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  @media(max-width:900px){.social-grid{grid-template-columns:1fr}}
+  .social-card{
+    padding:40px 32px;border-right:1px solid var(--line);
+    transition:background .4s;
+  }
+  .social-card:last-child{border-right:none}
+  @media(max-width:900px){
+    .social-card{border-right:none;border-bottom:1px solid var(--line)}
+    .social-card:last-child{border-bottom:none}
+  }
+  .social-card:hover{background:rgba(236,233,226,.02)}
+  .social-card .marker{
+    font-family:var(--serif);font-style:italic;font-size:14px;
+    color:var(--accent);margin-bottom:18px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .social-card .marker::after{
+    content:"";flex-grow:1;height:1px;background:var(--line);
+  }
+  .social-card h4{
+    font-family:var(--serif);font-size:22px;color:var(--text);
+    font-weight:400;margin-bottom:12px;line-height:1.25;
+  }
+  .social-card p{font-size:14px;color:var(--muted);line-height:1.65}
+
+  .result-path{
+    margin:30px auto 0;max-width:680px;padding:24px 0;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .result-path .r-line{
+    font-size:13px;color:var(--text);letter-spacing:.01em;line-height:1.55;
+    display:flex;align-items:center;justify-content:center;gap:12px;
+  }
+  .result-path .r-line .dot{
+    width:5px;height:5px;background:var(--accent);
+    border-radius:50%;flex-shrink:0;
+  }
+  .result-path .r-line em{font-style:italic;color:var(--accent)}
+  @media(max-width:640px){
+    .result-path .r-line{justify-content:flex-start;text-align:left}
+  }
+
+  .fade-in{opacity:0;transform:translateY(20px);transition:all 1s cubic-bezier(.25,.1,.25,1)}
+  .fade-in.visible{opacity:1;transform:translateY(0)}
+
+  ::-webkit-scrollbar{width:10px;height:10px}
+  ::-webkit-scrollbar-track{background:var(--bg)}
+  ::-webkit-scrollbar-thumb{background:#1a1a1e;border-radius:0}
+  ::-webkit-scrollbar-thumb:hover{background:#24242a}
+  ::selection{background:var(--accent);color:#0B0B0D}
+</style>
+</head>
+<body>
+
+<!-- ======================================================================
+     ⚙ STRIPE / WHATSAPP — CONFIGURACIÓN CENTRAL DE LINKS
+     ======================================================================
+     Cambia los 3 valores de abajo y todos los botones del sitio se
+     actualizan automáticamente al cargar la página.
+
+     Si por alguna razón el JS no carga, los hrefs hardcodeados en cada
+     botón siguen funcionando como fallback (mismo valor que aquí).
+
+       1) STRIPE_KIT_IA      → Botón "Kit IA" ($499)
+       2) STRIPE_SISTEMA     → Botón "Sistema Profesional" ($2,999)
+       3) WHATSAPP_NUMBER    → Número WhatsApp (formato internacional, sin "+" ni espacios)
+
+     Estos links aparecen en:
+       · Sección PRODUCTOS  → Kit IA + Sistema (botón principal)
+       · Sección CTA FINAL  → Kit IA + Sistema (botón principal)
+       · Sección NETWORK    → WhatsApp (lista de espera)
+       · Sistema Profesional → "Hablar antes de comprar" (WhatsApp)
+       · Footer             → WhatsApp (contacto)
+====================================================================== -->
+<script>
+  window.BREME_LINKS = {
+    STRIPE_KIT_IA:   "https://buy.stripe.com/00w6oJbmxg9U5dl0vJcMM0d",
+    STRIPE_SISTEMA:  "https://buy.stripe.com/dRm14pduF5vgfRZ7YbcMM0c",
+    WHATSAPP_NUMBER: "525539032758"
+  };
+</script>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#" class="logo">
+      <img src="LOGO_BREME_PNG.png" alt="BREME LicitaPro" class="logo-img"
+           onerror="this.onerror=null;this.style.display='none';var t=this.parentNode.querySelector('.logo-text');if(t){t.style.display='inline-flex';}" />
+      <span class="logo-text" style="display:none">BREME <span class="sub">Licitapro</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#problema">Problema</a>
+      <a href="#solucion">Sistema</a>
+      <a href="#productos">Productos</a>
+      <a href="#network">Network</a>
+      <a href="#productos" class="btn nav-cta">Ver productos</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-meta fade-in">
+      <span class="line-h"></span>
+      <span class="label">Ecosistema BREME · Licitapro</span>
+      <span class="line-h"></span>
+    </div>
+    <h1 class="fade-in">
+      El gobierno está soltando contratos <em>todos los días</em>,<br>
+      y tú no estás cobrando <em>ninguno</em>.
+    </h1>
+    <p class="fade-in" style="font-family:var(--serif);font-style:italic;font-size:clamp(18px,2vw,22px);color:var(--accent);max-width:640px;margin:-16px auto 34px;line-height:1.45;letter-spacing:-.005em;">
+      Para proveedores que quieren entrar al gobierno y cobrar contratos reales.
+    </p>
+    <p class="lead fade-in">
+      Sistema completo para entrar, competir y ganar licitaciones de gobierno en México.
+      Sin contactos, sin experiencia previa, sin palancas.
+    </p>
+    <p class="fade-in" style="font-size:15px;color:var(--text);opacity:.85;max-width:640px;margin:-30px auto 50px;line-height:1.7;letter-spacing:-.005em;padding:14px 24px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+      Puedes usar este sistema para <em>generar ingresos reales</em> con contratos de gobierno, incluso si nunca has participado antes.
+    </p>
+    <div class="hero-ctas fade-in">
+      <a href="#productos" class="btn btn-primary">Entrar al sistema</a>
+      <a href="#solucion" class="btn btn-outline">Conocer el sistema</a>
+    </div>
+    <div class="hero-stats fade-in">
+      <div class="hero-stat">
+        <div class="num"><em>+$50</em> MMDP</div>
+        <div class="lbl">En contratos diarios</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num"><em>3,200</em></div>
+        <div class="lbl">Licitaciones activas</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num"><em>100%</em></div>
+        <div class="lbl">Legal y transparente</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTORIDAD -->
+<section class="authority">
+  <div class="container">
+    <div class="authority-inner">
+      <div class="authority-left">
+        <div class="eyebrow accent">— Autoridad</div>
+        <h3>No es teoría.<br>Es experiencia en campo.</h3>
+        <p>Venimos de vender a gobierno. Sabemos qué gana un contrato, y qué lo tira.</p>
+      </div>
+      <div class="authority-right">
+        <div class="auth-item">
+          <div class="num-m">01</div>
+          <h4>Experiencia real</h4>
+          <p>Contratos ganados con gobierno en México, no teoría de salón.</p>
+        </div>
+        <div class="auth-item">
+          <div class="num-m">02</div>
+          <h4>Experiencia probada</h4>
+          <p>Años ganando contratos con dependencias estatales y federales.</p>
+        </div>
+        <div class="auth-item">
+          <div class="num-m">03</div>
+          <h4>Método validado</h4>
+          <p>Sin atajos, sin corrupción, sin intermediarios.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMA -->
+<section id="problema">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow accent">— El problema</div>
+      <h2>Mientras lees esto, alguien más<br>está cobrando tu contrato.</h2>
+      <p>Hay empresas ganando millones en licitaciones que tú ni siquiera sabías que existían. No porque sean mejores. Porque tú no sabes jugar el juego.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-item fade-in">
+        <div class="problem-num">i.</div>
+        <h3>Nadie te enseña a licitar</h3>
+        <p>Las universidades no lo enseñan. Los contadores no lo explican. Y mientras, el gobierno publica oportunidades todos los días.</p>
+      </div>
+      <div class="problem-item fade-in">
+        <div class="problem-num">ii.</div>
+        <h3>Crees que necesitas palancas</h3>
+        <p>Es un mito. Las licitaciones son públicas, transparentes y auditadas. Quien sabe presentarse, gana. Sin conocidos.</p>
+      </div>
+      <div class="problem-item fade-in">
+        <div class="problem-num">iii.</div>
+        <h3>Pierdes millones por no actuar</h3>
+        <p>Cada semana se sueltan contratos de 500 mil, 2 millones, 10 millones. Y quedan en manos de quienes sí se animaron.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUCIÓN -->
+<section id="solucion" class="solution">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow accent">— La solución</div>
+      <h2>BREME <em>LicitaPro</em>.<br>El sistema que ya debías tener.</h2>
+      <p>No es un curso más. Es un sistema operativo completo para detectar, presentar y ganar licitaciones.</p>
+    </div>
+    <div class="solution-grid">
+      <div class="sol-item fade-in">
+        <div class="sol-head"><span class="sol-index">i.</span><span class="sol-line"></span></div>
+        <div>
+          <h3 class="serif">Detección automática</h3>
+          <p>Identifica oportunidades en Compras MX y portales estatales en segundos, filtradas a tu giro específico.</p>
+        </div>
+      </div>
+      <div class="sol-item fade-in">
+        <div class="sol-head"><span class="sol-index">ii.</span><span class="sol-line"></span></div>
+        <div>
+          <h3 class="serif">Plantillas listas</h3>
+          <p>Propuestas técnicas, económicas y administrativas pre-armadas, editables y validadas en campo.</p>
+        </div>
+      </div>
+      <div class="sol-item fade-in">
+        <div class="sol-head"><span class="sol-index">iii.</span><span class="sol-line"></span></div>
+        <div>
+          <h3 class="serif">Estrategia real</h3>
+          <p>Cómo posicionar precio, cómo no descalificarte y cómo ganar sin subastar tu margen operativo.</p>
+        </div>
+      </div>
+      <div class="sol-item fade-in">
+        <div class="sol-head"><span class="sol-index">iv.</span><span class="sol-line"></span></div>
+        <div>
+          <h3 class="serif">Automatización con IA</h3>
+          <p>Inteligencia que te avisa, pre-llena documentos y reduce el 80% del trabajo manual repetitivo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIENCIA · ¿Para quién es? -->
+<section class="audience">
+  <div class="container">
+    <div class="audience-inner">
+      <div class="audience-head">
+        <div class="eyebrow accent">— Honestidad</div>
+        <h2>Esto es <em>para ti</em> si:</h2>
+        <p>Si te identificas con uno solo de estos puntos, ya estás dejando contratos sobre la mesa.</p>
+      </div>
+      <div class="audience-list">
+        <div class="audience-item fade-in">
+          <span class="ix">i.</span>
+          <p>Tienes un producto o servicio y quieres venderlo al gobierno con contratos formales.</p>
+        </div>
+        <div class="audience-item fade-in">
+          <span class="ix">ii.</span>
+          <p>Nunca has participado en una licitación y crees que es complicado, oscuro o solo para "los conocidos".</p>
+        </div>
+        <div class="audience-item fade-in">
+          <span class="ix">iii.</span>
+          <p>Estás estancado vendiendo solo en tu mercado local y buscas un comprador que sí firma contratos grandes.</p>
+        </div>
+        <div class="audience-item fade-in">
+          <span class="ix">iv.</span>
+          <p>Quieres entrar a contratos serios — no proyectos pequeños — y necesitas un método para hacerlo en orden.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF · Esto ya se está usando en campo -->
+<section class="social-proof">
+  <div class="container">
+    <div class="social-proof-head">
+      <div class="eyebrow accent">— Validación</div>
+      <h2>Esto ya se está usando <em>en campo</em>.</h2>
+      <p>No es una promesa de escritorio. Es lo que están haciendo proveedores reales con el sistema en este momento.</p>
+    </div>
+    <div class="social-grid">
+      <div class="social-card fade-in">
+        <div class="marker">i. Proveedores activos</div>
+        <h4>Participando en licitaciones reales</h4>
+        <p>Empresas mexicanas que están subiendo propuestas hoy a Compras MX y portales estatales usando las plantillas y la estructura del sistema.</p>
+      </div>
+      <div class="social-card fade-in">
+        <div class="marker">ii. Primer contrato</div>
+        <h4>Empresas que antes no vendían al gobierno</h4>
+        <p>Negocios que llevaban años solo en mercado privado, ahora compitiendo en procesos públicos sin necesidad de palancas ni intermediarios.</p>
+      </div>
+      <div class="social-card fade-in">
+        <div class="marker">iii. Entrada limpia</div>
+        <h4>Personas entrando sin experiencia previa</h4>
+        <p>Sin haber participado nunca en un proceso de gobierno, armando su primera propuesta con el Kit IA y escalando al Sistema Profesional.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTOS -->
+<section id="productos">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow accent">— Productos</div>
+      <h2>Elige tu nivel de juego.</h2>
+      <p>Empieza con el Kit IA. Cuando estés listo, escala al Sistema Profesional.</p>
+    </div>
+
+    <div class="products-list">
+
+      <!-- 01 Kit IA -->
+      <div class="product-row fade-in">
+        <div class="product-num-col"><span class="product-num">01</span></div>
+        <div class="product-main">
+          <span class="eyebrow">Empezar</span>
+          <h3 class="serif">Kit IA <span class="product-tag">Más vendido</span></h3>
+          <p class="desc">Para el que no sabe ni por dónde empezar. Prompts y plantillas listas para armar tu primera propuesta sin pelearte con una hoja en blanco — mientras otros ya están cobrando contratos que tú ni viste.</p>
+          <p class="sub-desc">No puedes seguir afuera mientras otros cobran lo que tú podrías estar facturando.</p>
+          <ul class="product-features">
+            <li>Empezar desde cero, hoy mismo</li>
+            <li>Prompts listos para copiar</li>
+            <li>Plantillas descargables editables</li>
+            <li>Acceso inmediato</li>
+          </ul>
+        </div>
+        <div class="product-price-col">
+          <div class="product-price"><span class="cur">$</span>499</div>
+          <div class="product-price-note">Pago único · MXN</div>
+          <div class="product-micro">Más vendido</div>
+          <div class="friction-row">
+            <span class="friction-tag">Sin experiencia</span>
+            <span class="friction-tag">Sin contactos</span>
+            <span class="friction-tag">Sin tecnicismos</span>
+          </div>
+        </div>
+        <div class="product-cta-col">
+          <!-- ⚡ STRIPE: KIT_IA -->
+          <a href="https://buy.stripe.com/00w6oJbmxg9U5dl0vJcMM0d" data-stripe="kit-ia" class="btn btn-primary">Entrar al Kit IA</a>
+          <div class="product-cta-note">Acceso inmediato · Empieza hoy mismo</div>
+          <div class="urgency-stack">
+            <span class="urgency-line">⚠ Acceso disponible por tiempo limitado</span>
+            <span class="urgency-line muted">El precio puede subir en cualquier momento</span>
+            <span class="urgency-line muted">No esperes a que otros tomen tu lugar</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 Sistema Profesional -->
+      <div class="product-row fade-in">
+        <div class="product-num-col"><span class="product-num">02</span></div>
+        <div class="product-main">
+          <span class="eyebrow">Escalar</span>
+          <h3 class="serif">Sistema <em>Profesional</em></h3>
+          <p class="desc">El producto serio del ecosistema. Detectar oportunidades, estructurar propuestas y cerrar contratos con gobierno con una metodología real, no con improvisación.</p>
+          <p class="sub-desc">Hecho para facturar contratos de gobierno con método — no para aprender teoría que después no sabes cómo aplicar.</p>
+          <ul class="product-features">
+            <li>Detectar oportunidades reales</li>
+            <li>Estructurar propuestas que cierran</li>
+            <li>Cerrar contratos con disciplina</li>
+            <li>Operar con orden desde el día 1</li>
+            <li>Incluye el Kit IA como base</li>
+          </ul>
+        </div>
+        <div class="product-price-col">
+          <div class="product-price"><span class="cur">$</span>2,999</div>
+          <div class="product-price-note">Pago único · MSI</div>
+          <div class="product-micro">Para competir en serio</div>
+          <div class="friction-row">
+            <span class="friction-tag">Sin experiencia</span>
+            <span class="friction-tag">Sin contactos</span>
+            <span class="friction-tag">Sin tecnicismos</span>
+          </div>
+        </div>
+        <div class="product-cta-col">
+          <!-- ⚡ STRIPE: SISTEMA -->
+          <a href="https://buy.stripe.com/dRm14pduF5vgfRZ7YbcMM0c" data-stripe="sistema" class="btn btn-outline">Acceder al Sistema Profesional</a>
+          <div class="product-cta-note">Empieza a operar en menos de 24h · Sin experiencia previa</div>
+          <!-- 💬 WHATSAPP: SISTEMA_PRECONSULTA -->
+          <a href="https://wa.me/525539032758?text=Quiero%20info%20del%20Sistema%20Profesional%20antes%20de%20comprar" data-whatsapp="sistema-preconsulta" class="btn-secondary-link" target="_blank" rel="noopener">Hablar antes de comprar → Resolver dudas rápido</a>
+          <div class="urgency-stack">
+            <span class="urgency-line">⚠ Acceso disponible por tiempo limitado</span>
+            <span class="urgency-line muted">El precio puede subir en cualquier momento</span>
+            <span class="urgency-line muted">No esperes a que otros tomen tu lugar</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- NETWORK -->
+<section id="network" class="network">
+  <div class="container">
+    <div class="network-inner">
+      <div class="network-left">
+        <span class="eyebrow accent">— Suscripción · BREME Network</span>
+        <h2>La comunidad donde<br><em>sí</em> se hacen negocios.</h2>
+        <p>Más allá del curso. Un ecosistema privado de proveedores, contactos y oportunidades reales compartidas entre miembros.</p>
+        <div class="net-price-block">
+          <div class="net-price"><span class="cur">$</span>999</div>
+          <div class="net-period">/ mes · MXN</div>
+        </div>
+        <!-- 💬 WHATSAPP: NETWORK_LISTA_ESPERA -->
+        <a href="https://wa.me/525539032758?text=Quiero%20entrar%20a%20BREME%20Network" data-whatsapp="network" class="btn btn-primary" target="_blank" rel="noopener">Unirme a lista de espera</a>
+        <div class="net-launch-note">Lanzamiento oficial · 30 Mayo 2026</div>
+        <div class="net-cap-note">Cupo limitado</div>
+      </div>
+      <div class="network-right">
+        <ul class="net-features">
+          <li><span class="ix">i.</span> Acceso a la red privada de miembros</li>
+          <li><span class="ix">ii.</span> Oportunidades relevantes de licitaciones</li>
+          <li><span class="ix">iii.</span> Conexiones estratégicas con proveedores y aliados</li>
+          <li><span class="ix">iv.</span> Intercambio estratégico entre miembros</li>
+          <li><span class="ix">v.</span> Información útil del ecosistema público</li>
+          <li><span class="ix">vi.</span> Bolsa interna de convenios y joint ventures</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="final-cta">
+  <div class="container final-cta-inner">
+    <div class="eyebrow accent">— La decisión</div>
+    <h2>Entras hoy,<br>o <em>miras cómo otro cobra tu contrato</em>.</h2>
+    <p class="lead-p">Empieza con el Kit IA por $499. Cuando estés listo, escala al Sistema Profesional. La comunidad llega después.</p>
+    <div class="final-cta-stats">
+      <div class="final-cta-stat">
+        <div class="n">+$50 MMDP</div>
+        <div class="l">Contratos diarios</div>
+      </div>
+      <div class="final-cta-stat">
+        <div class="n">3,200</div>
+        <div class="l">Licitaciones activas</div>
+      </div>
+      <div class="final-cta-stat">
+        <div class="n">24h</div>
+        <div class="l">Acceso inmediato</div>
+      </div>
+    </div>
+    <div class="final-cta-ctas">
+      <!-- ⚡ STRIPE: KIT_IA -->
+      <a href="https://buy.stripe.com/00w6oJbmxg9U5dl0vJcMM0d" data-stripe="kit-ia" class="btn btn-primary">Entrar al Kit IA · $499</a>
+      <!-- ⚡ STRIPE: SISTEMA -->
+      <a href="https://buy.stripe.com/dRm14pduF5vgfRZ7YbcMM0c" data-stripe="sistema" class="btn btn-outline">Acceder al Sistema · $2,999</a>
+    </div>
+    <div class="final-cta-note">Pago seguro · Acceso inmediato al comprar · Soporte en español</div>
+    <div class="fomo-line">Cada semana que no entras, hay contratos que <em>otros ya están cobrando</em>.</div>
+    <div class="result-path">
+      <div class="r-line"><span class="dot"></span> Muchos usuarios logran su <em>primera propuesta</em> en menos de 7 días.</div>
+      <div class="r-line"><span class="dot"></span> Puedes <em>empezar hoy mismo</em>, sin experiencia previa.</div>
+    </div>
+    <div class="final-cta-path">
+      <strong>01.</strong> Empieza con el <em>Kit IA</em> y arma tu primera propuesta.<br>
+      <strong>02.</strong> Escala al <em>Sistema Profesional</em> cuando quieras operar en serio.<br>
+      <strong>03.</strong> Accede a <em>BREME Network</em> como siguiente nivel cuando abramos cupo.
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <img src="LOGO_BREME_PNG.png" alt="BREME LicitaPro" class="logo-img"
+               onerror="this.onerror=null;this.style.display='none';var t=this.parentNode.querySelector('.logo-text');if(t){t.style.display='inline-flex';}" />
+          <span class="logo-text" style="display:none">BREME <span class="sub">Licitapro</span></span>
+        </div>
+        <p>Sistema profesional para operar licitaciones de gobierno en México. Legal, automatizado y probado en campo.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Ecosistema</h4>
+        <a href="#productos">Kit IA</a>
+        <a href="#productos">Sistema Profesional</a>
+        <a href="#network">BREME Network</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <!-- 💬 WHATSAPP: FOOTER -->
+        <a href="https://wa.me/525539032758" data-whatsapp="footer" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="mailto:ventas@bremelicitapro.com.mx">Correo</a>
+        <a href="#">Aviso de privacidad</a>
+        <a href="#">Términos</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 BREME · Todos los derechos reservados.</div>
+      <div class="meta">Hecho en México</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ===== Inyectar links centralizados desde window.BREME_LINKS =====
+  // Si el JS no carga, los hrefs hardcodeados arriba siguen funcionando.
+  (function () {
+    var L = window.BREME_LINKS || {};
+    // Stripe — Kit IA
+    if (L.STRIPE_KIT_IA) {
+      document.querySelectorAll('a[data-stripe="kit-ia"]').forEach(function (a) {
+        a.setAttribute('href', L.STRIPE_KIT_IA);
+      });
+    }
+    // Stripe — Sistema Profesional
+    if (L.STRIPE_SISTEMA) {
+      document.querySelectorAll('a[data-stripe="sistema"]').forEach(function (a) {
+        a.setAttribute('href', L.STRIPE_SISTEMA);
+      });
+    }
+    // WhatsApp — todos los enlaces wa.me, conservando ?text= si existe
+    if (L.WHATSAPP_NUMBER) {
+      document.querySelectorAll('a[data-whatsapp]').forEach(function (a) {
+        var current = a.getAttribute('href') || '';
+        var qIndex = current.indexOf('?');
+        var query = qIndex >= 0 ? current.substring(qIndex) : '';
+        a.setAttribute('href', 'https://wa.me/' + L.WHATSAPP_NUMBER + query);
+      });
+    }
+  })();
+
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  // Fade-in observer
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+
+  // Hero inmediato
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.hero .fade-in').forEach((el, i) => {
+        setTimeout(() => el.classList.add('visible'), i * 140);
+      });
+    }, 80);
+  });
+</script>
+
+</body>
+</html>
